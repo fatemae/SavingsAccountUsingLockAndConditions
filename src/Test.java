@@ -18,13 +18,13 @@ public class Test {
 			int idx = r.nextInt(numberOfAcc);
 			if(idx==i)
 				idx+=1;
-			threads[i]=new Thread(new transferRunnable(s[i], s[idx%numberOfAcc], 100, r.nextBoolean()));
+			threads[i]=new Thread(new transferRunnable(s[idx%numberOfAcc], s[i], 100, r.nextBoolean()));
 			threads[i].start();
 		}
 
 		// wait for an hour 
 		try {
-			Thread.sleep(60000);
+			Thread.sleep(60*60*1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -61,7 +61,7 @@ class transferRunnable implements Runnable{
 	@Override
 	public void run() {
 		try {
-			System.out.println("Amount transfer started from "+fromAccount.getName()+" to "+toAccount.getName());
+			System.out.println("Amount transfer started from "+fromAccount.getName()+" to "+toAccount.getName()+" where withdrawal isPreferred:"+preferredTransfer);
 			toAccount.transfer(amount, fromAccount, preferredTransfer);
 		} catch (InterruptedException e) {
 			System.out.println("Interrupted Exception caught!");

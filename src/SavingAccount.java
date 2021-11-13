@@ -12,7 +12,7 @@ public class SavingAccount {
     private Condition ordinaryWithdrawalCondition = WDLock.newCondition();
     private Condition preferredWithdrawalCondition = WDLock.newCondition();
     // to keep track of number of threads in preferred waiting
-    static int preferredWaitingThread=0;
+    private int preferredWaitingThread=0;
     
 
     public SavingAccount(int balance, String name){
